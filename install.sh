@@ -6,7 +6,7 @@
 ################
 
 ###
-# Let's set up a locale which supports UTF-8 encoding
+# Set up a locale which supports UTF-8 encoding
 ###
 
 locale  # check for UTF-8
