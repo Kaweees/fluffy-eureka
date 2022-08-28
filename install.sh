@@ -57,3 +57,13 @@ sudo apt install ros-foxy-desktop
 ###
 
 # sudo apt install ros-foxy-ros-base
+
+###
+# To install the Bare Bones Version of ROS 2 (Foxy), run the following commands. Contains just the communication libraries, message packages, command line tools.
+###
+
+###
+# Let's set up the ROS 2 (Foxy) Enviornment. Replace ".bash" with your shell if you're not using bash. Possible values are: setup.bash, setup.sh, setup.zsh
+###
+
+source /opt/ros/foxy/setup.bash
