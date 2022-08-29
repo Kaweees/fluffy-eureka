@@ -90,7 +90,9 @@ done
 export ROS_DOMAIN_ID=number
 
 ###
-# Add the ROS 2 (Foxy) setup command and ROS Domain ID setting to the shell startup script.
+# The ROS 2 development environment needs to be correctly configured before use.
+# This can be done by sourcing the setup files in every new shell you open, or adding the source command to your startup script.
+# Add the ROS 2 (Foxy) setup command and ROS Domain ID setting to the shell startup script upon user approval.
 ###
 
 while true; do
