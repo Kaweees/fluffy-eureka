@@ -46,24 +46,62 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 ###
-# Install the Desktop Version of ROS 2 (Foxy). Contains Along with ROS, RViz, demos, tutorials
+# Install either the Desktop Version or Bare Bones Version of ROS 2 (Foxy). 
+# Bare Bones Version just contains the communication libraries, message packages, and command line tools.
+# Desktop Version also includes a GUI, RViz, demos, and tutorials.
 ###
 
-sudo apt update && sudo apt upgrade
-sudo apt install ros-foxy-desktop
+while true; do
+  read -p "Would you like to install the Desktop or Bare Bones Version of ROS 2? (D/B): " version
+  case $version in
+    [Dd]* )
+      sudo apt update && sudo apt upgrade
+      sudo apt install ros-foxy-desktop
+      break;;
+    [Bb]* )
+      sudo apt install ros-foxy-ros-base
+      break;;
+    * )
+      echo "Invalid input, please try again.";;
+  esac
+done
 
 ###
-# To install the Bare Bones Version of ROS 2 (Foxy), run the following commands. Contains just the communication libraries, message packages, command line tools.
-###
-
-# sudo apt install ros-foxy-ros-base
-
-###
-# To install the Bare Bones Version of ROS 2 (Foxy), run the following commands. Contains just the communication libraries, message packages, command line tools.
-###
-
-###
-# Let's set up the ROS 2 (Foxy) Enviornment. Replace ".bash" with your shell if you're not using bash. Possible values are: setup.bash, setup.sh, setup.zsh
+# Let's source the ROS 2 (Foxy) setup files. Replace ".bash" with your shell if you're not using bash. Possible values are: setup.bash, setup.sh, setup.zsh
 ###
 
 source /opt/ros/foxy/setup.bash
+
+###
+# Let's set the ROS Domain ID environment variable. The domain ID should be between 0 and 101, inclusively, for compatibility purposes.
+###
+
+while true; do
+  read -p "Enter an ROS Domain ID: " number
+  [[ $number =~ ^[0-9]+$ ]] || { echo "Enter a valid number"; continue; }
+  if ((0 <= number && number <= 101)); then
+  echo "valid number"
+  break
+  else
+  echo "The Domain ID must be between 0 and 101, inclusively"
+  fi
+done
+
+export ROS_DOMAIN_ID=number
+
+###
+# Add the ROS 2 (Foxy) setup command and ROS Domain ID setting to the shell startup script.
+###
+
+while true; do
+  read -p "Would you like to add the ROS 2 (Foxy) setup command and Domain ID setting to your shell startup? (Y/N): " yn
+  case $yn in
+    [Yy]* )
+      echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+      echo "export ROS_DOMAIN_ID=${number}" >> ~/.bashrc
+      break;;
+    [Nn]* )
+      exit;;
+    * ) echo "Invalid input, please try again.";;
+  esac
+done
