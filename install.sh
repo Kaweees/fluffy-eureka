@@ -26,13 +26,6 @@ sudo apt install software-properties-common
 sudo add-apt-repository universe
 
 ###
-# Add the ROS 2 (Foxy) apt repositories
-###
-
-sudo apt update && sudo apt install curl gnupg2 lsb-release
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
-
-###
 # Add the ROS 2 (Foxy) apt repositories to your system.
 ###
 
@@ -44,6 +37,8 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -
 ###
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+# sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
 ###
 # Install either the Desktop Version or Bare Bones Version of ROS 2 (Foxy). 
