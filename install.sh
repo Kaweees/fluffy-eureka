@@ -53,6 +53,7 @@ while true; do
       break;;
     [Bb]* )
       sudo apt install ros-foxy-ros-base
+      sudo apt install python3-colcon-common-extensions
       break;;
     * )
       echo "Invalid input, please try again.";;
