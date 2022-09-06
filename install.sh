@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 #################
-# Let's install some ROS 2 (Foxy) prereqs.
+# Let's install some ROS 2 (Foxy) prereqs for Ubuntu Server 20.04.
+# If using a Raspberry Pi, install the Ubuntu image onto it first (64-bit version) 
+# https://ubuntu.com/download/raspberry-pi
 # Are you ready?
 ################
 
@@ -59,6 +61,13 @@ while true; do
       echo "Invalid input, please try again.";;
   esac
 done
+
+###
+# Install auto-completion for ROS2 command line tools
+###
+
+sudo apt install python3-pip
+pip3 install argcomplete
 
 ###
 # Let's source the ROS 2 (Foxy) setup files. Replace ".bash" with your shell if you're not using bash. Possible values are: setup.bash, setup.sh, setup.zsh
