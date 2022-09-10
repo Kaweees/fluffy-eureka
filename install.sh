@@ -47,7 +47,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 ###
 
 while true; do
-  read -p "Would you like to install the Desktop or Bare Bones Version of ROS 2? (D/B): " version
+  read -p "Would you like to install the Desktop or Bare Bones Version of ROS 2? (d/b): " version;
   case $version in
     [Dd]* )
       sudo apt update && sudo apt upgrade
@@ -83,11 +83,11 @@ while true; do
   read -p "Enter an ROS Domain ID: " number
   [[ $number =~ ^[0-9]+$ ]] || { echo "Enter a valid number"; continue; }
   if ((0 <= number && number <= 101)); then
-  echo "valid number"
-  break
+    echo "valid number"
+    break;;
   else
-  echo "The Domain ID must be between 0 and 101, inclusively"
-  fi
+    echo "The Domain ID must be between 0 and 101, inclusively";
+  fi;
 done
 
 export ROS_DOMAIN_ID=number
@@ -99,14 +99,14 @@ export ROS_DOMAIN_ID=number
 ###
 
 while true; do
-  read -p "Would you like to add the ROS 2 (Foxy) setup command and Domain ID setting to your shell startup? (Y/N): " yn
+  read -p "Would you like to add the ROS 2 (Foxy) setup command and Domain ID setting to your shell startup? (y/n): " yn;
   case $yn in
     [Yy]* )
       echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
       echo "export ROS_DOMAIN_ID=${number}" >> ~/.bashrc
       break;;
     [Nn]* )
-      exit;;
+      break;
     * ) echo "Invalid input, please try again.";;
   esac
 done
